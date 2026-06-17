@@ -16,11 +16,12 @@ python3 examples/hilbert_transform_example.py
 python3 examples/instantaneous_frequency_example.py
 ```
 
-脚本会将图片保存到 `outputs/`。
+脚本会将图片保存到 `examples/output/`。
 
 ## 文档
 
 - `docs/stft.md`
 - `docs/wavelet_transform.md`
 - `docs/hilbert_transform.md`
+- `docs/envelope_detection_comparison.md`
 - `docs/instantaneous_frequency.md`

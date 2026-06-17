@@ -3,7 +3,8 @@
 from pathlib import Path
 import os
 
-os.environ.setdefault("MPLCONFIGDIR", str(Path("outputs/.matplotlib")))
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+os.environ.setdefault("MPLCONFIGDIR", str(OUTPUT_DIR / ".matplotlib"))
 import matplotlib
 
 matplotlib.use("Agg")
@@ -35,8 +36,7 @@ def main() -> None:
     t, x, true_envelope = make_am_signal(fs, duration)
     z, envelope, phase = analytic_signal(x)
 
-    output_dir = Path("outputs")
-    output_dir.mkdir(exist_ok=True)
+    OUTPUT_DIR.mkdir(exist_ok=True)
 
     fig, axes = plt.subplots(3, 1, figsize=(9, 7), constrained_layout=True)
     axes[0].plot(t, x, linewidth=0.8, label="Real signal")
@@ -59,7 +59,7 @@ def main() -> None:
     axes[2].set_ylabel("Hilbert imaginary part")
     axes[2].axis("equal")
 
-    output_path = output_dir / "hilbert_transform_example.png"
+    output_path = OUTPUT_DIR / "hilbert_transform_example.png"
     fig.savefig(output_path, dpi=160)
     print(f"Saved {output_path}")
 

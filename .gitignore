@@ -37,6 +37,8 @@ ENV/
 .ipynb_checkpoints/
 
 # Project-generated outputs
+output/
+**/output/
 outputs/
 **/outputs/
 

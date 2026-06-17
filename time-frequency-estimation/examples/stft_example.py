@@ -3,7 +3,8 @@
 from pathlib import Path
 import os
 
-os.environ.setdefault("MPLCONFIGDIR", str(Path("outputs/.matplotlib")))
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+os.environ.setdefault("MPLCONFIGDIR", str(OUTPUT_DIR / ".matplotlib"))
 import matplotlib
 
 matplotlib.use("Agg")
@@ -58,8 +59,7 @@ def main() -> None:
     frequencies, times, power = compute_stft(x, fs)
     ridge = estimate_ridge(frequencies, power)
 
-    output_dir = Path("outputs")
-    output_dir.mkdir(exist_ok=True)
+    OUTPUT_DIR.mkdir(exist_ok=True)
 
     fig, axes = plt.subplots(2, 1, figsize=(9, 6), constrained_layout=True)
     axes[0].plot(t, x, linewidth=0.9)
@@ -77,7 +77,7 @@ def main() -> None:
     axes[1].legend(loc="upper left")
     fig.colorbar(mesh, ax=axes[1], label="Power [dB]")
 
-    output_path = output_dir / "stft_example.png"
+    output_path = OUTPUT_DIR / "stft_example.png"
     fig.savefig(output_path, dpi=160)
     print(f"Saved {output_path}")
 

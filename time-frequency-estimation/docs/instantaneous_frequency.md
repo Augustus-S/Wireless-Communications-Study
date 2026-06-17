@@ -147,5 +147,5 @@ python3 examples/instantaneous_frequency_example.py
 输出图片：
 
 ```text
-outputs/instantaneous_frequency_example.png
+examples/output/instantaneous_frequency_example.png
 ```

@@ -124,5 +124,5 @@ python3 examples/wavelet_transform_example.py
 输出图片：
 
 ```text
-outputs/wavelet_transform_example.png
+examples/output/wavelet_transform_example.png
 ```

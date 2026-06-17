@@ -3,7 +3,8 @@
 from pathlib import Path
 import os
 
-os.environ.setdefault("MPLCONFIGDIR", str(Path("outputs/.matplotlib")))
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+os.environ.setdefault("MPLCONFIGDIR", str(OUTPUT_DIR / ".matplotlib"))
 import matplotlib
 
 matplotlib.use("Agg")
@@ -51,8 +52,7 @@ def main() -> None:
     coefficients, scales = morlet_cwt(x, fs, frequencies)
     power = np.abs(coefficients) ** 2
 
-    output_dir = Path("outputs")
-    output_dir.mkdir(exist_ok=True)
+    OUTPUT_DIR.mkdir(exist_ok=True)
 
     fig, axes = plt.subplots(2, 1, figsize=(9, 6), constrained_layout=True)
     axes[0].plot(t, x, linewidth=0.9)
@@ -66,7 +66,7 @@ def main() -> None:
     axes[1].set_ylabel("Pseudo-frequency [Hz]")
     fig.colorbar(mesh, ax=axes[1], label="Power")
 
-    output_path = output_dir / "wavelet_transform_example.png"
+    output_path = OUTPUT_DIR / "wavelet_transform_example.png"
     fig.savefig(output_path, dpi=160)
     print(f"Saved {output_path}")
     print(f"Scale range: {scales.min():.2f} to {scales.max():.2f} samples")

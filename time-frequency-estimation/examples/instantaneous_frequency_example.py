@@ -3,7 +3,8 @@
 from pathlib import Path
 import os
 
-os.environ.setdefault("MPLCONFIGDIR", str(Path("outputs/.matplotlib")))
+OUTPUT_DIR = Path(__file__).resolve().parent / "output"
+os.environ.setdefault("MPLCONFIGDIR", str(OUTPUT_DIR / ".matplotlib"))
 import matplotlib
 
 matplotlib.use("Agg")
@@ -52,8 +53,7 @@ def main() -> None:
     t, x, true_if = make_noisy_chirp(fs, duration, rng)
     phase, raw_if, smoothed_if = estimate_instantaneous_frequency(x, fs)
 
-    output_dir = Path("outputs")
-    output_dir.mkdir(exist_ok=True)
+    OUTPUT_DIR.mkdir(exist_ok=True)
 
     fig, axes = plt.subplots(3, 1, figsize=(9, 7), constrained_layout=True)
     axes[0].plot(t, x, linewidth=0.8)
@@ -75,7 +75,7 @@ def main() -> None:
     axes[2].set_ylabel("Frequency [Hz]")
     axes[2].legend(loc="upper left")
 
-    output_path = output_dir / "instantaneous_frequency_example.png"
+    output_path = OUTPUT_DIR / "instantaneous_frequency_example.png"
     fig.savefig(output_path, dpi=160)
     print(f"Saved {output_path}")
 

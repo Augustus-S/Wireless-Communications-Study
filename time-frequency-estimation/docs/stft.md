@@ -112,5 +112,5 @@ python3 examples/stft_example.py
 输出图片：
 
 ```text
-outputs/stft_example.png
+examples/output/stft_example.png
 ```
